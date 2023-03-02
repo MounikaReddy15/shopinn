@@ -48,17 +48,42 @@
 			cursor: pointer;
 		}
 
-		.bookmark-icon {
-			margin-right: 16px;
+		.bookmark {
+			position: relative;
+			display: flex;
+			align-items: center;
+			font-size: 20px;
 			cursor: pointer;
-		}
 
-		.bookmark-count {
-			color: #fff;
-			font-size: 12px;
-			font-weight: bold;
-			padding: 4px 8px;
-			border-radius: 50%;
+			.bookmark-count {
+				color: #fff;
+				font-size: 12px;
+				font-weight: bold;
+				padding: 4px 8px;
+				border-radius: 50%;
+			}
+
+			.bookmark-items {
+				position: absolute;
+				top: 100%;
+				right: 0;
+				background-color: #fff;
+				border: 1px solid #ccc;
+				padding: 10px;
+				min-width: 200px;
+				box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+				z-index: 1;
+
+				ul {
+					margin: 0;
+					padding: 0;
+
+					li {
+						list-style: none;
+						margin-bottom: 5px;
+					}
+				}
+			}
 		}
 	}
 }

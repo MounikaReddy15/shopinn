@@ -1,26 +1,29 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchProducts } from '../redux/actions/creators';
+import { bookmarkProduct, filterProducts, unbookmarkProduct } from '../redux/actions/product';
 import '../styles/Products.scss'
 
 const Products = () => {
-	const [products, setProducts] = useState([]);
-	const [productsList, setProductsList] = useState(products);
+	const dispatch = useDispatch();
+
+	const productsList = useSelector(state => state.products.productsList);
+	const bookmarks = useSelector(state => state.products.bookmarks);
 
 	useEffect(() => {
-		const fetchProducts = async () => {
-			const response = await fetch('https://fakestoreapi.com/products/');
-			const products = await response.json();
-			console.log('data', products);
-			setProducts(products);
-			setProductsList(products);
-		}
-
-		fetchProducts()
-	}, [])
+		dispatch(fetchProducts());
+	}, [dispatch])
 
 	const filterCategory = (category) => {
-		const filteredProducts = products.filter((prod) => prod.category === category);
-		console.log('f', filteredProducts);
-		setProductsList(filteredProducts);
+		dispatch(filterProducts(category));
+	}
+
+	const handleBookmark = (product) => {
+		dispatch(bookmarkProduct(product))
+	}
+
+	const handleUnbookmark = (product) => {
+		dispatch(unbookmarkProduct(product))
 	}
 
 	return (
@@ -28,7 +31,7 @@ const Products = () => {
 			<div className="sidebar">
 				<h2>Categories</h2>
 				<ul>
-					<li onClick={() => setProductsList(products)}>All</li>
+					<li onClick={() => dispatch(fetchProducts())}>All</li>
 					<li onClick={() => filterCategory("electronics")}>Electronic</li>
 					<li onClick={() => filterCategory("jewelery")}>Jewelery</li>
 					<li onClick={() => filterCategory("men's clothing")}>Men</li>
@@ -42,6 +45,11 @@ const Products = () => {
 						<div className="product-details">
 							<h3>{product.title}</h3>
 							<p>{product.price}</p>
+							{bookmarks.some(p => p.id === product.id) ? (
+								<button onClick={() => handleUnbookmark(product)}>Unbookmark</button>
+							) : (
+								<button onClick={() => handleBookmark(product)}>Bookmark</button>
+							)}
 						</div>
 					</div>
 				))}

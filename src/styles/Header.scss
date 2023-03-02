@@ -1,0 +1,89 @@
+.navbar {
+	display: flex;
+	justify-content: flex-end;
+	align-items: center;
+	padding: 16px;
+	background-color: #008080;
+
+	.search-box {
+		display: flex;
+		align-items: center;
+		border: 1px solid #ccc;
+		border-radius: 4px;
+		width: 280px;
+		margin-right: 16px;
+
+		input[type='search'] {
+			border: none;
+			outline: none;
+			flex: 1;
+			margin-left: 8px;
+			background-color: #008080;
+			padding: 10px;
+			color: #fff;
+		}
+
+		button {
+			background-color: #008080;
+			color: #fff;
+			border: none;
+			padding: 8px;
+			border-radius: 4px;
+			margin-left: 8px;
+			cursor: pointer;
+		}
+	}
+
+	.navbar-options {
+		display: flex;
+		align-items: center;
+
+		p {
+			background-color: transparent;
+			border: none;
+			font-size: 16px;
+			font-weight: bold;
+			color: #fff;
+			margin-right: 16px;
+			cursor: pointer;
+		}
+
+		.bookmark {
+			position: relative;
+			display: flex;
+			align-items: center;
+			font-size: 20px;
+			cursor: pointer;
+
+			.bookmark-count {
+				color: #fff;
+				font-size: 12px;
+				font-weight: bold;
+				padding: 4px 8px;
+				border-radius: 50%;
+			}
+
+			.bookmark-items {
+				position: absolute;
+				top: 100%;
+				right: 0;
+				background-color: #fff;
+				border: 1px solid #ccc;
+				padding: 10px;
+				min-width: 200px;
+				box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+				z-index: 1;
+
+				ul {
+					margin: 0;
+					padding: 0;
+
+					li {
+						list-style: none;
+						margin-bottom: 5px;
+					}
+				}
+			}
+		}
+	}
+}

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import '../styles/Products.scss'
 
 const Products = () => {
 	const [productsList, setProductsList] = useState([]);
@@ -15,7 +16,7 @@ const Products = () => {
 	}, [])
 
 	return (
-		<div className="product-list">
+		<div className="products-list">
 			{productsList.map(product => (
 				<div key={product.id} className="product-card">
 					<img src={product.image} alt={product.title} />

@@ -1,15 +1,15 @@
 import React from 'react';
 import '../styles/Header.scss';
 
-const Header = ({ cartCount, onLogout, onSearch }) => {
+const Header = () => {
 	return (
 		<div className="navbar">
 			<div className="search-box">
-				<input type="text" onChange='' />
+				<input type="search" />
 			</div>
 			<div className="navbar-options">
 				<div className="bookmark-icon">
-					<i class="fa-light fa-bookmark"></i>
+					<i className="fa-light fa-bookmark"></i>
 					<p> Bookmark </p>
 				</div>
 				<p className="logout">

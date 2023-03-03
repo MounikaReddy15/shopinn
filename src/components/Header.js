@@ -1,13 +1,13 @@
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 import { searchProducts } from '../redux/actions/creators';
 import { logout } from '../redux/actions/product';
 import '../styles/Header.scss';
 
 const Header = () => {
 	const dispatch = useDispatch();
-	const nav = useNavigate();
+	// const nav = useNavigate();
 	const [showCart, setShowCart] = useState(false)
 	const bookmarks = useSelector(state => state.products.bookmarks);
 

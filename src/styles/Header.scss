@@ -23,6 +23,10 @@
 			color: #fff;
 		}
 
+		input[type='placeholder'] {
+			color: #fff;
+		}
+
 		button {
 			background-color: #008080;
 			color: #fff;
@@ -42,7 +46,6 @@
 			background-color: transparent;
 			border: none;
 			font-size: 16px;
-			font-weight: bold;
 			color: #fff;
 			margin-right: 16px;
 			cursor: pointer;
@@ -55,10 +58,9 @@
 			font-size: 20px;
 			cursor: pointer;
 
-			.bookmark-count {
+			.p {
 				color: #fff;
-				font-size: 12px;
-				font-weight: bold;
+				font-size: 16px;
 				padding: 4px 8px;
 				border-radius: 50%;
 			}
@@ -86,4 +88,11 @@
 			}
 		}
 	}
+}
+
+.main-title {
+	text-align: center;
+	color: #fff;
+	padding: 10px;
+	background-color: #008080;
 }

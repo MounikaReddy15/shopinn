@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchProducts } from '../redux/actions/creators';
-import { bookmarkProduct, filterProducts, unbookmarkProduct } from '../redux/actions/product';
+import { fetchProducts, filterProducts } from '../redux/actions/creators';
+import { bookmarkProduct, unbookmarkProduct } from '../redux/actions/product';
 import '../styles/Products.scss'
 
 const Products = () => {
@@ -32,19 +32,19 @@ const Products = () => {
 				<h2>Categories</h2>
 				<ul>
 					<li onClick={() => dispatch(fetchProducts())}>All</li>
-					<li onClick={() => filterCategory("electronics")}>Electronic</li>
-					<li onClick={() => filterCategory("jewelery")}>Jewelery</li>
-					<li onClick={() => filterCategory("men's clothing")}>Men</li>
-					<li onClick={() => filterCategory("women's clothing")}>Women</li>
+					<li onClick={() => filterCategory("smartphones")}>Electronic</li>
+					<li onClick={() => filterCategory("womens-jewellery")}>Jewelery</li>
+					<li onClick={() => filterCategory("mens-shirts")}>Men</li>
+					<li onClick={() => filterCategory("womens-dresses")}>Women</li>
 				</ul>
 			</div>
 			<div className="products-list">
 				{productsList.map(product => (
 					<div key={product.id} className="product-card">
-						<img src={product.image} alt={product.title} />
+						<img src={product.images[0]} alt={product.title} />
 						<div className="product-details">
 							<h3>{product.title}</h3>
-							<p>{product.price}</p>
+							<p>{product.price} Rs</p>
 							{bookmarks.some(p => p.id === product.id) ? (
 								<button onClick={() => handleUnbookmark(product)}>Unbookmark</button>
 							) : (

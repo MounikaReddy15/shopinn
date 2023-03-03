@@ -1,12 +1,10 @@
-/* ProductCard.scss */
-
 .row {
 	display: flex;
 
 	.products-list {
 		display: flex;
 		flex-wrap: wrap;
-		flex: 0 0 76.666667%;
+		flex: 0 0 86.666667%;
 		justify-content: center;
 
 		.product-card {
@@ -40,15 +38,22 @@
 					font-size: 1.2rem;
 					color: #888;
 				}
+
+				button {
+					background-color: #008080;
+					color: #fff;
+					padding: 10px;
+					border: none;
+					border-radius: 5px;
+				}
 			}
 		}
 	}
 
 	.sidebar {
 		width: 100px;
-		flex: 0 0 23.333333%;
+		flex: 0 0 13.333333%;
 		height: 100%;
-		background-color: #f8f8f8;
 		padding: 16px;
 
 		h2 {
@@ -65,8 +70,7 @@
 
 		li {
 			margin-bottom: 8px;
-			font-size: 14px;
-			font-weight: bold;
+			font-size: 19px;
 			cursor: pointer;
 
 			&:hover {
@@ -79,5 +83,25 @@
 			font-size: 14px;
 			line-height: 1.5;
 		}
+	}
+}
+
+@media (max-width: 767px) {
+	.row {
+		flex-wrap: wrap;
+	}
+
+	.products-container {
+		flex-direction: column;
+		align-items: center;
+		flex: 0 0 100%;
+	}
+
+	.sidebar {
+		width: 100%;
+		flex: 100%;
+		flex: none;
+		margin-bottom: 16px;
+		justify-content: center;
 	}
 }

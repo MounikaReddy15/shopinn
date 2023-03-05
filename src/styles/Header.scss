@@ -98,3 +98,10 @@
 	padding: 10px;
 	background-color: #008080;
 }
+
+@media (max-width: 767px) {
+	.navbar {
+		flex-wrap: wrap;
+		justify-content: flex-start;
+	}
+}

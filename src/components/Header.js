@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { searchProducts } from '../redux/actions/creators';
 import { logout } from '../redux/actions/product';
@@ -8,6 +8,8 @@ const Header = () => {
 	const dispatch = useDispatch();
 	const [showCart, setShowCart] = useState(false)
 	const bookmarks = useSelector(state => state.products.bookmarks);
+	const user = useSelector(state => state.products.user);
+	const bookmarksList = JSON.parse(localStorage.getItem('books'))
 
 	const handleHover = () => {
 		setShowCart(true)
@@ -26,7 +28,10 @@ const Header = () => {
 		dispatch(logout());
 	};
 
-	let isValid = localStorage.getItem("authenticated");
+	const [isValid, setisValid] = useState(false)
+	useEffect(()=> {
+		setisValid(localStorage.getItem("authenticated"));
+	}, [user, bookmarks])
 
 	return (
 		<div>
@@ -38,11 +43,11 @@ const Header = () => {
 						</div>
 						<div className="navbar-options">
 							<div className="bookmark" onMouseEnter={handleHover} onMouseLeave={handleLeave}>
-								{bookmarks.length > 0 && <p className="bookmark-count">Bookmarks{" "}[{bookmarks.length}]</p>}
+								{bookmarksList?.length > 0 && <p className="bookmark-count">Bookmarks{" "}[{bookmarksList.length}]</p>}
 								{showCart && (
 									<div className="bookmark-items">
 										<ul>
-											{bookmarks.map(item => (
+											{bookmarksList.map(item => (
 												<li key={item.id}>
 													{item.title} x {item.price}
 												</li>

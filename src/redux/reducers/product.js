@@ -21,6 +21,7 @@ const initialState = {
 	bookmarks: [],
 	user: null,
 	accessToken: null,
+	books: JSON.parse(localStorage.getItem('books')) || [],
 	error: ''
 };
 
@@ -47,14 +48,18 @@ const productReducer = (state = initialState, action) => {
 				error: action.payload
 			};
 		case BOOKMARK_PRODUCT:
+			const updatedBooks = [...state.bookmarks, action.payload];
+      localStorage.setItem('books', JSON.stringify(updatedBooks));
 			return {
 				...state,
 				bookmarks: [...state.bookmarks, action.payload]
 			}
 		case UNBOOKMARK_PRODUCT:
+			const filteredBookmarks = state.bookmarks.filter(id => id !== action.payload);
+				localStorage.setItem('books', JSON.stringify(filteredBookmarks));
 			return {
 				...state,
-				bookmarks: state.bookmarks.filter(id => id !== action.payload)
+				bookmarks : filteredBookmarks
 			}
 		case FILTER_PRODUCTS_REQUEST:
 			return {
@@ -68,7 +73,7 @@ const productReducer = (state = initialState, action) => {
 		case LOGIN_REQUEST:
 			return { ...state, loading: true, error: null }
 		case LOGIN_SUCCESS:
-			localStorage.setItem('authenticated', true)
+			localStorage.setItem('authenticated', true);
 			return {
 				...state,
 				user: action.payload.user,
@@ -79,7 +84,8 @@ const productReducer = (state = initialState, action) => {
 		case LOGIN_FAILURE:
 			return { ...state, loading: false, error: action.payload }
 		case LOGOUT:
-			localStorage.removeItem("authenticated");
+			localStorage.removeItem('authenticated');
+			localStorage.removeItem('books');
 			return { ...state, user: null, accessToken: null }
 		case SEARCH_PRODUCTS_REQUEST:
 			return {

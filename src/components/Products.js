@@ -9,6 +9,7 @@ const Products = () => {
 
 	const productsList = useSelector(state => state.products.productsList);
 	const bookmarks = useSelector(state => state.products.bookmarks);
+	const bookmarksList = JSON.parse(localStorage.getItem('books'))
 
 	useEffect(() => {
 		dispatch(fetchProducts());
@@ -25,6 +26,9 @@ const Products = () => {
 	const handleUnbookmark = (product) => {
 		dispatch(unbookmarkProduct(product))
 	}
+
+	useEffect(()=> {
+	}, [bookmarks])
 
 	return (
 		<div className='row'>
@@ -45,7 +49,7 @@ const Products = () => {
 						<div className="product-details">
 							<h3>{product.title}</h3>
 							<p>{product.price} Rs</p>
-							{bookmarks.some(p => p.id === product.id) ? (
+							{bookmarksList?.some(p => p.id === product.id) ? (
 								<button onClick={() => handleUnbookmark(product)}>Unbookmark</button>
 							) : (
 								<button onClick={() => handleBookmark(product)}>Bookmark</button>

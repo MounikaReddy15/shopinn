@@ -1,15 +1,15 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-// import { useNavigate } from "react-router-dom";
 import { searchProducts } from '../redux/actions/creators';
 import { logout } from '../redux/actions/product';
 import '../styles/Header.scss';
 
 const Header = () => {
 	const dispatch = useDispatch();
-	// const nav = useNavigate();
 	const [showCart, setShowCart] = useState(false)
 	const bookmarks = useSelector(state => state.products.bookmarks);
+	const user = useSelector(state => state.products.user);
+	const bookmarksList = JSON.parse(localStorage.getItem('books'))
 
 	const handleHover = () => {
 		setShowCart(true)
@@ -25,11 +25,13 @@ const Header = () => {
 	}
 
 	const handleLogout = () => {
-		// nav("/");
-    dispatch(logout());
-  };
+		dispatch(logout());
+	};
 
-	let isValid = localStorage.getItem("authenticated");
+	const [isValid, setisValid] = useState(false)
+	useEffect(()=> {
+		setisValid(localStorage.getItem("authenticated"));
+	}, [user, bookmarks])
 
 	return (
 		<div>
@@ -37,18 +39,15 @@ const Header = () => {
 				(
 					<div className="navbar">
 						<div className="search-box">
-							<input type="search" placeholder="search" onChange={handleSearch} />
+							<input type="search" placeholder="Search..." onChange={handleSearch} />
 						</div>
 						<div className="navbar-options">
-							<p className="logout" onClick={handleLogout}>
-								Logout
-							</p>
 							<div className="bookmark" onMouseEnter={handleHover} onMouseLeave={handleLeave}>
-								{bookmarks.length > 0 && <p className="bookmark-count">Bookmark{" "}{bookmarks.length}</p>}
+								{bookmarksList?.length > 0 && <p className="bookmark-count">Bookmarks{" "}[{bookmarksList.length}]</p>}
 								{showCart && (
 									<div className="bookmark-items">
 										<ul>
-											{bookmarks.map(item => (
+											{bookmarksList.map(item => (
 												<li key={item.id}>
 													{item.title} x {item.price}
 												</li>
@@ -57,6 +56,9 @@ const Header = () => {
 									</div>
 								)}
 							</div>
+							<a href="/" className="logout" onClick={handleLogout}>
+								Logout
+							</a>
 						</div>
 					</div>
 				) :

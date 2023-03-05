@@ -30,13 +30,13 @@
 				text-align: center;
 
 				h3 {
-					font-size: 1.2rem;
+					font-size: 1.3rem;
 					margin-bottom: 0.5rem;
 				}
 
 				p {
-					font-size: 1.2rem;
-					color: #888;
+					font-size: 1.3rem;
+					color: #120f0f;
 				}
 
 				button {
@@ -95,6 +95,10 @@
 		flex-direction: column;
 		align-items: center;
 		flex: 0 0 100%;
+	}
+
+	.row .products-list .product-card{
+		width: 200px;
 	}
 
 	.sidebar {
